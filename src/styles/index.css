@@ -1,0 +1,9 @@
+body {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; }
+
+.editor {
+  padding: 5%; }
+  .editor-title {
+    font-size: 16px; }
+  .editor-message-hidden {
+    display: none; }
