@@ -9,8 +9,8 @@ class Editor extends Component {
             saveMessage,
             createSmilie,
             data,
+            deletePreview,
         } = this.props;
-        console.log(data[date] && data[date].mood && data[date].mood === true ? this.props.data[date].mood : undefined);
         return (
             <div className="editor">
                 <h1 className="editor-title">Fecha</h1>
@@ -38,7 +38,7 @@ class Editor extends Component {
                         <Link className="link" to='/calendar' onClick={createSmilie}>Guardar</Link>
                     </button>
                     <button className="editor-button-cancel">
-                        <Link className="link" to='/calendar'>Cancelar</Link>
+                        <Link className="link" to='/calendar' onClick={deletePreview}>Cancelar</Link>
                     </button>
                 </div>
             </div>

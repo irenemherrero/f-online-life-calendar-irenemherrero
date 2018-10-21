@@ -10,20 +10,26 @@ class App extends Component {
     super(props);
     this.state = {
         data: {},
-        dataToPrint:{}
+        itemToPrint: null
     }
     this.getDay = this.getDay.bind(this);
     this.showMessageInput=this.showMessageInput.bind(this);
     this.saveMessage=this.saveMessage.bind(this);
     this.createSmilie=this.createSmilie.bind(this);
+    this.handleFaceClick=this.handleFaceClick.bind(this);
+    this.deletePreview=this.deletePreview.bind(this);
   }
+
   componentDidMount(){
     this.getDay();
   }
+
+  //Genera la fecha de hoy y la guarda en el estado para pasársela al editor.
+
   getDay() {
     today = new Date();
     let dd = today.getDate();
-    let mm = today.getMonth() + 1; //January is 0
+    let mm = today.getMonth() + 1;
     let yyyy = today.getFullYear();
     today = dd + '/' + mm + '/' + yyyy;
     this.setState({
@@ -33,8 +39,10 @@ class App extends Component {
         date: today,
         }
       }
-    }, () => console.log(this.state.data))
+    });
   }
+
+  //Guarda en el estado si el usuario ha marcado la opción feliz o triste.
 
   showMessageInput(e){
     if(e.target.value === "happy"){
@@ -46,7 +54,7 @@ class App extends Component {
             mood:true
             }
           }
-        })
+        });
     } else {
         this.setState({
           data: {
@@ -57,9 +65,11 @@ class App extends Component {
             contentMessage: '',
             }
           }
-        })
+        });
     }
   }
+
+  // Guarda en el estado el mensaje que escribe el usuario.
 
   saveMessage(e){
     this.setState({
@@ -70,23 +80,38 @@ class App extends Component {
         contentMessage: e.target.value,
         }
       }
-    })
+    });
   }
+
+  //Cuando pinchas guardar: guarda en LocalStorage los datos del día actual.
 
   createSmilie(){
     if(!JSON.parse(localStorage.getItem('dates'))){
       localStorage.setItem(`dates`, JSON.stringify([this.state.data[today]]));
     } else {
       const dates = JSON.parse(localStorage.getItem('dates'));
-      console.log(dates);
       dates.push(this.state.data[today]);
-      console.log(dates);
       localStorage.setItem(`dates`, JSON.stringify(dates));
-      this.setState({
-        dataToPrint: dates,
-      })
+      this.deletePreview();
     }
   }
+
+  //Borra los datos del cuadro de la información que se muestra cuando pinchas en una carita en el calendario.
+
+  deletePreview(){
+    this.setState({
+      itemToPrint: null
+    });
+  }
+
+  // Cuando pinchas en la carita: guarda en el estado de App el id del día para luego imprimir los datos de ese día en el cuadro de detalle.
+
+  handleFaceClick(e){
+    this.setState({
+      itemToPrint: e.target.id,
+    });
+  }
+  
   render() {
     return (
       <div className="App">
@@ -100,6 +125,7 @@ class App extends Component {
               showMessageInput={this.showMessageInput}
               saveMessage={this.saveMessage} 
               createSmilie={this.createSmilie}
+              deletePreview={this.deletePreview}
             />
           } 
         />
@@ -107,7 +133,8 @@ class App extends Component {
           path='/calendar' 
           render={ () =>
             <Calendar
-              dataToPrint={this.state.dataToPrint}
+              handleFaceClick={this.handleFaceClick}
+              itemToPrint={this.state.itemToPrint}
             />
           }
         />
