@@ -1,3 +1,9 @@
+*{
+    box-sizing: border-box;
+    outline:none;
+    text-decoration: none;
+}
+
 body{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
@@ -6,13 +12,115 @@ body{
 
 .editor{
     padding: 5%;
+    padding: 10% 30%;
     &-title{
     font-size: 16px;
     }
+    &-date{
+        &-container{
+        border: 2px solid lightgray;
+        border-radius: 5px;
+        padding: 5px 5px 5px 30px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        }
+        &-date{
+        margin:0;
+        }
+        &-icon{
+            color: lightgray;
+        }
+    }
     &-message{
+        &-show{
+            display:block;
+        }
         &-hidden{
             display:none;
         }
+        &-box{
+            width: 100%;
+            height: 60px;
+            padding: 10px;
+            overflow: scroll;
+        }
     }
+    &-button{
+        &-container{
+            display: flex;
+            flex-direction:column;
+            padding-top: 30px;
+        }
+        &-save{
+            background-color: rgb(36, 147, 238);
+            color: white;
+            height: 40px;
+            cursor: pointer;
+            font-size: 16px;
+            padding-top: 10px;
+        }
+        &-cancel{
+            color: black;
+            height: 40px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            padding-top: 7px;
+        }
+    }
+}
+
+//Calendar
+
+.calendar{
+    padding: 5%;
+    padding: 10% 30%;
+    &-button{
+        background-color: rgb(36, 147, 238);
+        color: white;
+        height: 40px;
+        cursor: pointer;
+        font-size: 16px;
+        width: 100%;
+        padding-top: 7px;
+    }
+    &-link{
+        color:white;
+    }
+    &-container{
+        background-color: white;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    &-face{
+        &-happy{
+            width:50px;
+            height: 50px;
+            border-radius: 50px;
+            background-color: yellow;
+            margin: 2%;
+            text-align: center;
+            padding-top: 6px;
+            font-size: 30px;
+        }
+        &-sad{
+            width:50px;
+            height: 50px;
+            border-radius: 50px;
+            background-color: red;
+            margin: 2%;
+            text-align: center;
+            padding-top: 6px;
+            font-size: 30px;
+        }
+    }
+}
+
+.link{
+    display: block;
+    height: 100%;
 }
 

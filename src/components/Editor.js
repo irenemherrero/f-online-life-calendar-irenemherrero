@@ -1,26 +1,45 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Editor extends Component {
     render() {
+        const date = this.props.date;
         const {
-            getDay,
             showMessageInput,
             saveMessage,
-            displayMessage,
-            contentMessage
+            createSmilie,
+            data,
         } = this.props;
+        console.log(data[date] && data[date].mood && data[date].mood === true ? this.props.data[date].mood : undefined);
         return (
             <div className="editor">
                 <h1 className="editor-title">Fecha</h1>
-                <p> {getDay()}</p>
+                <div className="editor-date-container">
+                    <p className="editor-date-date"> {date}</p>
+                    <i className="editor-date-icon fas fa-calendar-alt"></i>
+                </div>
                 <h1 className="editor-title">Estado</h1>
-                <input type="radio" name="mood" value="happy" onChange={showMessageInput}/>
-                <label>:)</label>
-                <input type="radio" name="mood" value="sad" onChange={showMessageInput}/>
-                <label>:(</label>
-                <div className={!displayMessage ? 'editor-message-hidden' : null}>
+                <div className="editor-status-container">
+                    <input type="radio" name="mood" value="happy" onChange={showMessageInput} />
+                    <label>:)</label>
+                    <input type="radio" name="mood" value="sad" onChange={showMessageInput} />
+                    <label>:(</label>
+                </div>
+                <div 
+                className={data[date] && data[date].mood && data[date].mood === true ? 'editor-message-show' : 'editor-message-hidden'}
+                >
                     <h1 className="editor-title">Mensaje</h1>
-                    <input type="text" onChange={saveMessage} value={contentMessage}/>
+                    <textarea className="editor-message-box" 
+                    value ={data[date] && data[date].contentMessage ? data[date].contentMessage : undefined} 
+                    onChange={saveMessage} placeholder="¿Por qué es un buen día?" />
+                </div>
+                <div className="editor-button-container">
+                    <button className="editor-button-save">
+                        <Link className="link" to='/calendar' onClick={createSmilie}>Guardar</Link>
+                    </button>
+                    <button className="editor-button-cancel">
+                        <Link className="link" to='/calendar'>Cancelar</Link>
+                    </button>
                 </div>
             </div>
         );
