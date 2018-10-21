@@ -14,7 +14,7 @@ Especificaciones
 
 Navegación:
 
--Hay dos vistas, la vista de edición y la del listado de días
--Se accede al editor con el botón + que aparece fijo en la parte superior de la pantalla
--Los botones guardar/cancelar devuelven a la vista de listado
--Los datos se guardarán en el local storage del navegador ;)
+- Hay dos vistas, la vista de edición y la del listado de días
+- Se accede al editor con el botón + que aparece fijo en la parte superior de la pantalla
+- Los botones guardar/cancelar devuelven a la vista de listado
+- Los datos se guardarán en el local storage del navegador ;)
